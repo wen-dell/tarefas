@@ -3,13 +3,18 @@
     <header>
       Minhas tarefas
     </header>
+    <Task/>
   </div>
 </template>
 
 <script>
+import Task from './components/Task.vue';
 
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    Task
+  }
 }
 </script>
 
