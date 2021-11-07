@@ -41,7 +41,6 @@ export default {
             }
 
             this.tarefa = '';
-            console.log(this.tarefas);
         },
         deleteTask(key) {
             let filtro = this.tarefas.filter((item) => {
@@ -49,6 +48,18 @@ export default {
             });
             this.tarefas = filtro;
         }
+    },
+    watch: {
+        tarefas: {
+            deep: true,
+            handler() {
+                localStorage.setItem('tasks', JSON.stringify(this.tarefas));
+            }
+        }
+    },
+    created() {
+        const json = localStorage.getItem('tasks');
+        this.tarefas = JSON.parse(json) || [];
     }
 }
 </script>
