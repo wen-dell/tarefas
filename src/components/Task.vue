@@ -11,6 +11,10 @@
 
         <Item :lista="tarefas" :delete="deleteTask"/>
 
+        <span :class="{pend: pendente}" v-show="tarefas.length > 0">
+            Você tem <strong>{{tarefas.length}}</strong> tarefas pendentes.
+        </span>
+
     </div>
 </template>
 
@@ -26,6 +30,7 @@ export default {
         return {
             tarefa: '',
             tarefas: [],
+            pendente: false
         }
     },
     methods: {
@@ -53,6 +58,9 @@ export default {
         tarefas: {
             deep: true,
             handler() {
+                if (this.tarefas.length > 4) {
+                    this.pendente = true;
+                }
                 localStorage.setItem('tasks', JSON.stringify(this.tarefas));
             }
         }
@@ -100,5 +108,9 @@ export default {
         border-radius: 4px;
         font-size: 14px;
         outline: none;
+    }
+
+    .pend {
+        color: #ff0000;
     }
 </style>
